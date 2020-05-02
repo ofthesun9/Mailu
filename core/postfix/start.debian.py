@@ -13,7 +13,7 @@ from socrate import system, conf
 log.basicConfig(stream=sys.stderr, level=os.environ.get("LOG_LEVEL", "WARNING"))
 
 def start_podop():
-    os.setuid(101)
+    os.setuid(102)
     url = "http://" + os.environ["ADMIN_ADDRESS"] + "/internal/postfix/"
     # TODO: Remove verbosity setting from Podop?
     run_server(0, "postfix", "/tmp/podop.socket", [
