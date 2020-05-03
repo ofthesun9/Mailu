@@ -36,7 +36,7 @@ RUN pip3 install "podop>0.2.5"
 #  dovecot dovecot-lmtpd dovecot-pop3d dovecot-submissiond dovecot-pigeonhole-plugin rspamd-client xapian-core \
 #  && mkdir /var/lib/dovecot
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends\
-  dovecot-core dovecot-imapd dovecot-lmtpd dovecot-pop3d dovecot-submissiond rspamd xapian-tools\
+  dovecot-core dovecot-imapd dovecot-lmtpd dovecot-pop3d dovecot-submissiond dovecot-sieve rspamd xapian-tools\
   && rm -rf /var/lib/apt/lists
 
 COPY --from=builder /usr/lib/dovecot/modules/lib21_fts_xapian_plugin.* /usr/lib/dovecot/modules/
