@@ -18,7 +18,8 @@ RUN pip3 install socrate==0.2.0
 # && pip3 install watchdog
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends\
   certbot nginx libnginx-mod-mail openssl curl\
-  && rm -rf /var/lib/apt/lists
+  && rm -rf /var/lib/apt/lists\
+  && pip3 install watchdog
 
 COPY conf /conf
 COPY static /static
