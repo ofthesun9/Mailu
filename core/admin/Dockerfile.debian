@@ -1,5 +1,5 @@
 # First stage to build assets
-ARG DISTRO=ubuntu:focal
+ARG DISTRO=debian:buster-slim
 ARG ARCH=""
 FROM ${ARCH}node:8 as assets
 #COPY --from=balenalib/rpi-alpine:3.10 /usr/bin/qemu-arm-static /usr/bin/qemu-arm-static
