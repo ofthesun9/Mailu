@@ -248,9 +248,9 @@ Postfix, Dovecot, Nginx and Rspamd support overriding configuration files. Overr
 ``$ROOT/overrides``. Please refer to the official documentation of those programs for the
 correct syntax. The following file names will be taken as override configuration:
 
-- `Postfix`_ - ``postfix.cf``;
-- `Dovecot`_ - ``dovecot.conf``;
-- `Nginx`_ - All ``*.conf`` files in the ``nginx`` sub-directory.
+- `Postfix`_ - ``postfix.cf`` in postfix sub-directory;
+- `Dovecot`_ - ``dovecot.conf`` in dovecot sub-directory;
+- `Nginx`_ - All ``*.conf`` files in the ``nginx`` sub-directory;
 - `Rspamd`_ - All files in the ``rspamd`` sub-directory.
 
 *Issue reference:* `206`_.
@@ -319,7 +319,7 @@ After successfull login the domain part will be striped and the rest used as use
 *Issue reference:* `575`_.
 
 .. _`Postfix`: http://www.postfix.org/postconf.5.html
-.. _`Dovecot`: https://wiki.dovecot.org/ConfigFile
+.. _`Dovecot`: https://doc.dovecot.org/configuration_manual/config_file/config_file_syntax/
 .. _`NGINX`:   https://nginx.org/en/docs/
 .. _`Rspamd`:  https://www.rspamd.com/doc/configuration/index.html
 
@@ -532,6 +532,26 @@ In any case, using a dedicated DNS server will improve the performance of your m
 
 *Issue reference:* `206`_, `554`_, `681`_.
 
+Can I learn ham/spam messages from an already existing mailbox?
+```````````````````````````````````````````````````````````````
+Mailu is supporting automatic spam learning for messages moved to the Junk mailbox. Any email moved from the Junk Folder will learnt as ham. 
+
+If you already have an existing mailbox and want Mailu to learn them all as ham messages, you might run rspamc from within the dovecot container:
+
+.. code-block:: bash
+
+  rspamc -h antispam:11334 -P mailu -f 13 fuzzy_add /mail/user\@example.com/.Ham_Learn/cur/
+
+This should learn every file located in the ``Ham_Learn`` folder from user@example.com 
+
+Likewise, to lean all messages within the folder ``Spam_Learn`` as spam messages :
+
+.. code-block:: bash
+
+  rspamc -h antispam:11334 -P mailu -f 11 fuzzy_add /mail/user\@example.com/.Spam_Learn/cur/
+
+*Issue reference:* `1438`_.
+
 Is there a way to support more (older) ciphers?
 ```````````````````````````````````````````````
 
@@ -609,6 +629,8 @@ iptables -t nat -A POSTROUTING -o eth0 -p tcp --dport 25 -j SNAT --to <your mx i
 .. _`897`: https://github.com/Mailu/Mailu/issues/897
 .. _`1090`: https://github.com/Mailu/Mailu/issues/1090
 .. _`unbound`: https://nlnetlabs.nl/projects/unbound/about/
+.. _`1438`: https://github.com/Mailu/Mailu/issues/1438
+
 
 A user gets ``Sender address rejected: Access denied. Please check the`` ``message recipient […] and try again`` even though the sender is legitimate?
 ``````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````

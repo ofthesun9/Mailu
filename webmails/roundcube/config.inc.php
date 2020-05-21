@@ -16,7 +16,8 @@ $config['plugins'] = array(
     'zipdownload',
     'markasjunk',
     'managesieve',
-    'enigma'
+    'enigma',
+    'carddav'
 );
 
 $front = getenv('FRONT_ADDRESS') ? getenv('FRONT_ADDRESS') : 'front';
@@ -56,3 +57,6 @@ $config['skin'] = 'elastic';
 
 // Enigma gpg plugin
 $config['enigma_pgp_homedir'] = '/data/gpg';
+
+// Set From header for DKIM signed message delivery reports
+$config['mdn_use_from'] = true;
