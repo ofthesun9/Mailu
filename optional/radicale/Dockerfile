@@ -1,4 +1,4 @@
-ARG DISTRO=alpine:3.12
+ARG DISTRO=alpine:3.13
 FROM $DISTRO
 
 # python3 shared with most images
